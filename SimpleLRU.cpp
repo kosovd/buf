@@ -6,7 +6,7 @@ namespace Backend {
 // See MapBasedGlobalLockImpl.h
 
 void SimpleLRU::_erase(lru_node &element) {
-	_free_size += (element.key.size() + element.value.size());
+  _free_size += (element.key.size() + element.value.size());
   if (element.prev == nullptr) {
     _lru_head.swap(element.next);
     if (_lru_head != nullptr)
@@ -20,12 +20,10 @@ void SimpleLRU::_erase(lru_node &element) {
     element.next.release();
     element.prev = nullptr;
   }
-//  _free_size += (element.key.size() + element.value.size());
+  //  _free_size += (element.key.size() + element.value.size());
 }
 
-size_t SimpleLRU::get_free_size() {
-  return _free_size;
-}
+size_t SimpleLRU::get_free_size() { return _free_size; }
 size_t SimpleLRU::_pop_back() {
   lru_node *lru_tail;
   if (_lru_head == nullptr)
@@ -54,8 +52,8 @@ bool SimpleLRU::_push_front(lru_node *element) {
     return false;
 
   while (_free_size < size) {
-	  _pop_back();
- }
+    _pop_back();
+  }
 
   if (_lru_head != nullptr) {
     auto old_head = _lru_head.release();
